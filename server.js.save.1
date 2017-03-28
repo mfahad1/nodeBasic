@@ -1,0 +1,23 @@
+var express = require('express');
+var app = express();
+var fs = require("fs");
+app.get('/', function (req, res) {
+   res.send('Hello World',req.query);
+})
+
+var server = app.listen(8081, function () {
+   var host = server.address().address
+   var port = server.address().port
+   
+   console.log("Example app listening at http://%s:%s", host, port)
+
+   var pdf = require('html-pdf');
+
+
+pdf.create("<div>demi demi</div>").toStream(function(err, stream){
+  stream.pipe(fs.createWriteStream('./foo.pdf'));
+});
+ 
+
+
+})
